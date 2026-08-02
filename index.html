@@ -570,7 +570,7 @@
 
   <div class="topbar">
     <span class="dot"></span>
-    <span>SYSTEM.LIVE</span>
+    <span>SHARANGA</span>
     <span class="spacer"></span>
     <span class="meta">
       <span id="clock">--:--:--</span>
@@ -812,6 +812,8 @@ const EXPERIENCE = [
     title: "DEEP_LEARNING_INTERN",
     org: "Tech Mahindra",
     period: "8 WEEKS",
+    repo: "https://github.com/RAGU-NAN-DHAN/TECHM_DL_INTERN",
+    repoLabel: "View notebooks",
     body: "Built SmartVision AI Assistant, an enterprise platform combining computer vision, NLP, transformers and retrieval-augmented generation to handle document Q&A, image classification and report summarization. The wider programme covered neural networks, CNNs, transfer learning, transformers and generative AI in PyTorch and Hugging Face.",
     tags: ["PYTORCH", "RAG", "TRANSFORMERS", "COMPUTER VISION"],
     detail: {
@@ -898,9 +900,9 @@ function tagRow(tags, noDot){
   ).join("") + "</div>";
 }
 
-function repoButton(repo){
+function repoButton(repo, label){
   return repo
-    ? `<a class="btn" href="${esc(repo)}" target="_blank" rel="noopener">${ICON.arrow}View Source</a>`
+    ? `<a class="btn" href="${esc(repo)}" target="_blank" rel="noopener">${ICON.arrow}${esc(label || "View Source")}</a>`
     : `<button class="btn pending" type="button" disabled>${ICON.arrow}REPO_PENDING</button>`;
 }
 
@@ -920,7 +922,7 @@ function itemCard(item, kind){
   return `<div class="card">
     <div class="card-head">${head}</div>
     <p>${item.body}</p>
-    <div class="btn-row">${openBtn}${kind === "project" ? repoButton(item.repo) : ""}</div>
+    <div class="btn-row">${openBtn}${"repo" in item ? repoButton(item.repo, item.repoLabel) : ""}</div>
     ${tagRow(item.tags, item.noDot)}
   </div>`;
 }
@@ -998,7 +1000,7 @@ function caseMarkup(item, index){
       <h3>${esc(d.stackLabel || "STACK")}</h3>
       <div class="chips">${d.stack.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div>
     </div>
-    <div class="btn-row">${"repo" in item ? repoButton(item.repo) : ""}</div>
+    <div class="btn-row">${"repo" in item ? repoButton(item.repo, item.repoLabel) : ""}</div>
   `;
 }
 
